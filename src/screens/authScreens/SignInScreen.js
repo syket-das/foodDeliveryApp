@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Header from '../../components/Header';
-import { colors, title } from '../../global/styles';
-import { Icon } from 'react-native-elements';
+import { colors, parameters, title } from '../../global/styles';
+import { Button, Icon, SocialIcon } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 
 const SignInScreen = () => {
@@ -63,6 +63,48 @@ const SignInScreen = () => {
           </Animatable.View>
         </View>
       </View>
+      <View style={{ marginHorizontal: 20, marginTop: 30 }}>
+        <Button
+          title="Sign In"
+          type="outline"
+          buttonStyle={parameters.styledButton}
+          titleStyle={parameters.buttonTitle}
+        />
+      </View>
+      <View style={{ alignItems: 'center', marginTop: 10 }}>
+        <Text style={{ ...styles.text1, textDecorationLine: 'underline' }}>
+          Forgot password?
+        </Text>
+      </View>
+      <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 30 }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>OR</Text>
+      </View>
+      <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+        <SocialIcon
+          title="Sign In With Facebook"
+          button
+          type="facebook"
+          styles={styles.socialIcon}
+          onPress={() => {}}
+        />
+        <SocialIcon
+          title="Sign In With Google"
+          button
+          type="google"
+          styles={styles.socialIcon}
+          onPress={() => {}}
+        />
+      </View>
+      <View style={{ marginTop: 25, marginLeft: 20 }}>
+        <Text style={{ ...styles.text1 }}>New here?</Text>
+      </View>
+      <View style={{ marginTop: 20, alignItems: 'flex-end' }}>
+        <Button
+          title="Create an account"
+          buttonStyle={styles.createButton}
+          titleStyle={styles.createButtonTitle}
+        />
+      </View>
     </View>
   );
 };
@@ -95,5 +137,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     padding: 10,
+  },
+  socialIcon: {
+    borderRadius: 12,
+    height: 50,
+  },
+  createButton: {
+    backgroundColor: 'white',
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ff8c52',
+    marginHorizontal: 20,
+  },
+  createButtonTitle: {
+    color: '#ff8c52',
+    fontSize: 16,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -3,
   },
 });

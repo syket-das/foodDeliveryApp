@@ -20,11 +20,31 @@ export const colors = {
 
 export const parameters = {
   headerHeight: 50,
+
+  styledButton: {
+    backgroundColor: '#ff8c52',
+    alignContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
+    paddingHorizontal: 20,
+    height: 50,
+    borderColor: '#ff8c52',
+    borderWidth: 1,
+  },
+  buttonTitle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -3,
+  },
 };
 
 export const title = {
   fontSize: 20,
   fontWeight: 'bold',
-  color: 'red',
-  margin: 10,
+  color: '#ff8c52',
+  marginHorizontal: 20,
+  marginVertical: 10,
 };
