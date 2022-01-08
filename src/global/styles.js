@@ -21,3 +21,10 @@ export const colors = {
 export const parameters = {
   headerHeight: 50,
 };
+
+export const title = {
+  fontSize: 20,
+  fontWeight: 'bold',
+  color: 'red',
+  margin: 10,
+};
