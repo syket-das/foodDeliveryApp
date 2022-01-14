@@ -5,13 +5,18 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  FlatList,
+  Pressable,
+  Image,
 } from 'react-native';
 import { colors } from '../global/styles';
 import HomeHeader from '../components/HomeHeader';
 import { Icon } from 'react-native-elements';
+import { filterData } from '../global/Data';
 
 export default function HomeScreen() {
   const [delivery, setDelivery] = React.useState(true);
+  const [indexCheck, setIndexCheck] = React.useState('0');
 
   return (
     <View style={styles.container}>
@@ -101,6 +106,55 @@ export default function HomeScreen() {
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>Categories</Text>
         </View>
+        <View>
+          <FlatList
+            persistentScrollbar={false}
+            horizontal
+            data={filterData}
+            keyExtractor={(item) => item.id}
+            extraData={indexCheck}
+            renderItem={({ item, index }) => {
+              return (
+                <Pressable
+                  onPress={() => {
+                    setIndexCheck(item.id);
+                  }}
+                >
+                  <View
+                    style={
+                      indexCheck === item.id
+                        ? { ...styles.smallCardSelected }
+                        : { ...styles.smallCard }
+                    }
+                  >
+                    <Image
+                      source={item.image}
+                      style={{
+                        height: 60,
+                        width: 60,
+                        borderRadius: 30,
+                      }}
+                    />
+                    <View>
+                      <Text
+                        style={
+                          indexCheck === item.id
+                            ? { ...styles.smallCardTextSelected }
+                            : { ...styles.smallCardText }
+                        }
+                      >
+                        {item.name}
+                      </Text>
+                    </View>
+                  </View>
+                </Pressable>
+              );
+            }}
+          />
+        </View>
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>Free Delivery Now</Text>
+        </View>
       </ScrollView>
     </View>
   );
@@ -154,5 +208,32 @@ const styles = StyleSheet.create({
   headerTextView: {
     backgroundColor: colors.grey5,
     paddingVertical: 2,
+  },
+  smallCard: {
+    borderRadius: 30,
+    backgroundColor: colors.grey5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    width: 80,
+    margin: 10,
+    height: 100,
+  },
+  smallCardSelected: {
+    borderRadius: 30,
+    backgroundColor: colors.buttons,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    width: 80,
+    margin: 10,
+    height: 100,
+  },
+  smallCardText: {
+    color: colors.grey2,
+  },
+  smallCardTextSelected: {
+    fontWeight: 'bold',
+    color: colors.cardbackground,
   },
 });
