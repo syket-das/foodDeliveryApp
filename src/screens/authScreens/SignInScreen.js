@@ -69,6 +69,9 @@ const SignInScreen = ({ navigation }) => {
           type="outline"
           buttonStyle={parameters.styledButton}
           titleStyle={parameters.buttonTitle}
+          onPress={() => {
+            navigation.navigate('HomeScreen');
+          }}
         />
       </View>
       <View style={{ alignItems: 'center', marginTop: 10 }}>
