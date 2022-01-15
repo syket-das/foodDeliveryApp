@@ -8,11 +8,16 @@ import {
   FlatList,
   Pressable,
   Image,
+  Dimensions,
 } from 'react-native';
 import { colors } from '../global/styles';
 import HomeHeader from '../components/HomeHeader';
 import { Icon } from 'react-native-elements';
-import { filterData } from '../global/Data';
+import { filterData, restaurantsData } from '../global/Data';
+import FoodCard from '../components/FoodCard';
+
+import CountDown from 'react-native-countdown-component';
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function HomeScreen() {
   const [delivery, setDelivery] = React.useState(true);
@@ -22,7 +27,9 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <HomeHeader />
       <ScrollView showsVerticalScrollIndicator={true} stickyHeaderIndices={[0]}>
-        <View>
+        <View
+          style={{ backgroundColor: colors.cardbackground, paddingBottom: 5 }}
+        >
           <View
             style={{
               marginTop: 10,
@@ -108,6 +115,7 @@ export default function HomeScreen() {
         </View>
         <View>
           <FlatList
+            showsHorizontalScrollIndicator={false}
             persistentScrollbar={false}
             horizontal
             data={filterData}
@@ -154,6 +162,97 @@ export default function HomeScreen() {
         </View>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>Free Delivery Now</Text>
+        </View>
+
+        <View>
+          <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+            <Text
+              style={{
+                marginLeft: 15,
+                fontSize: 15,
+                marginTop: 10,
+                marginRight: 5,
+              }}
+            >
+              Expeiring in{' '}
+            </Text>
+            <CountDown
+              until={3600}
+              size={15}
+              digitStyle={{ backgroundColor: colors.lightgreen }}
+              digitTxtStyle={{ color: colors.cardbackground }}
+              timeToShow={['M', 'S']}
+              timeLabels={{ m: 'Min', s: 'Sec' }}
+            />
+          </View>
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            style={{ marginTop: 10, marginBottom: 10 }}
+            horizontal
+            data={restaurantsData}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View style={{ marginHorizontal: 12 }}>
+                <FoodCard
+                  screenWidth={SCREEN_WIDTH * 0.8}
+                  images={item.images}
+                  restaurantName={item.restaurantName}
+                  farAway={item.farAway}
+                  businessAddress={item.businessAddress}
+                  averageReview={item.averageReview}
+                  numberOfReview={item.numberOfReview}
+                />
+              </View>
+            )}
+          />
+        </View>
+
+        {/*  */}
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>Promotions available</Text>
+        </View>
+
+        <View>
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            style={{ marginTop: 10, marginBottom: 10 }}
+            horizontal
+            data={restaurantsData}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View style={{ marginHorizontal: 12 }}>
+                <FoodCard
+                  screenWidth={SCREEN_WIDTH * 0.8}
+                  images={item.images}
+                  restaurantName={item.restaurantName}
+                  farAway={item.farAway}
+                  businessAddress={item.businessAddress}
+                  averageReview={item.averageReview}
+                  numberOfReview={item.numberOfReview}
+                />
+              </View>
+            )}
+          />
+        </View>
+
+        {/*  */}
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>Restaurants in your area</Text>
+        </View>
+        <View style={{ width: SCREEN_WIDTH, paddingTop: 10 }}>
+          {restaurantsData.map((item) => (
+            <View key={item.id} style={{ paddingBottom: 20, marginLeft: 5 }}>
+              <FoodCard
+                screenWidth={SCREEN_WIDTH * 0.95}
+                images={item.images}
+                restaurantName={item.restaurantName}
+                farAway={item.farAway}
+                businessAddress={item.businessAddress}
+                averageReview={item.averageReview}
+                numberOfReview={item.numberOfReview}
+              />
+            </View>
+          ))}
         </View>
       </ScrollView>
     </View>
