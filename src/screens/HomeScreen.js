@@ -19,7 +19,7 @@ import FoodCard from '../components/FoodCard';
 import CountDown from 'react-native-countdown-component';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [delivery, setDelivery] = React.useState(true);
   const [indexCheck, setIndexCheck] = React.useState('0');
 
@@ -55,6 +55,7 @@ export default function HomeScreen() {
             <TouchableOpacity
               onPress={() => {
                 setDelivery(false);
+                navigation.navigate('RestaurantsMapScreen');
               }}
             >
               <View
@@ -255,6 +256,22 @@ export default function HomeScreen() {
           ))}
         </View>
       </ScrollView>
+      {delivery && (
+        <View style={styles.floatingButton}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('RestaurantsMapScreen');
+            }}
+          >
+            <Icon
+              type="material-community"
+              name="map-marker-radius"
+              color={colors.buttons}
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -334,5 +351,17 @@ const styles = StyleSheet.create({
   smallCardTextSelected: {
     fontWeight: 'bold',
     color: colors.cardbackground,
+  },
+  floatingButton: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.cardbackground,
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 20,
+    right: 20,
+    elevation: 4,
   },
 });
