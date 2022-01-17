@@ -70,7 +70,7 @@ const SignInScreen = ({ navigation }) => {
           buttonStyle={parameters.styledButton}
           titleStyle={parameters.buttonTitle}
           onPress={() => {
-            navigation.navigate('HomeScreen');
+            navigation.navigate('RootClientTabs');
           }}
         />
       </View>
