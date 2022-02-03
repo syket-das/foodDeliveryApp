@@ -22,7 +22,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 export default function HomeScreen({ navigation }) {
   const [delivery, setDelivery] = React.useState(true);
   const [indexCheck, setIndexCheck] = React.useState('0');
-
+  // hello
   return (
     <View style={styles.container}>
       <HomeHeader navigation={navigation} />
