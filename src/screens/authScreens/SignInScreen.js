@@ -70,7 +70,7 @@ const SignInScreen = ({ navigation }) => {
           buttonStyle={parameters.styledButton}
           titleStyle={parameters.buttonTitle}
           onPress={() => {
-            navigation.navigate('RootClientTabs');
+            navigation.navigate('DrawerNavigator');
           }}
         />
       </View>
